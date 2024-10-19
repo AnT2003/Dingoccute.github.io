@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dingoc cutephomaique</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #ff69b4, #ff1493); /* Gradient màu nền hồng */
+}
+
+.rose {
+    position: relative;
+    width: 800px; /* Kích thước của bông hoa */
+    height: 600px; /* Kích thước của bông hoa */
+    overflow: hidden;
+}
+
+.rose img {
+    position: absolute;
+    width: 30%;
+    height: 35%;
+    opacity: 0;
+}
+
+.rose img:nth-child(1) {
+    top: 0;
+    right: 70%;
+    transform: rotate(0deg) translateX(0px) translateY(0px);
+    transition: opacity 0.5s ease-in-out;
+}
+
+.rose img:nth-child(3) {
+    bottom: 30%;
+    right: 10%;
+    transform: rotate(25deg) translateX(0px) translateY(0px);
+    transition: opacity 2s ease-in-out;
+}
+
+.rose img:nth-child(2) {
+    top: 0;
+    left: 70%;
+    transform: rotate(0deg) translateX(0px) translateY(0px);
+    transition: opacity 2.5s ease-in-out;
+}
+
+.rose img:nth-child(4) {
+    bottom: 30%;
+    left: 10%;
+    transform: rotate(-30deg) translateX(0px) translateY(0px);
+    transition: opacity 1s ease-in-out;
+}
+
+.rose img:nth-child(5) {
+    bottom: 0;
+    left: 50%;
+    transform: rotate(0deg) translateX(-50%) translateY(0px);
+    transition: opacity 1.5s ease-in-out;
+}
+
+.rose img:nth-child(6) {
+    bottom: 60%;
+    left: 50%;
+    transform: rotate(0deg) translateX(-50%) translateY(0px);
+    width: 25%;
+    height: 30%;
+    transition: opacity 0s ease-in-out;
+}
+
+.rose:hover img {
+    opacity: 1;
+}
+
+.snowflake {
+    position: absolute;
+    color: #fff;
+    font-size: 20px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10vh);
+    }
+    100% {
+        transform: translateY(100vh);
+    }
+}
+
+/* Style cho từng chữ */
+.rose span {
+    position: absolute;
+    color: white;
+    font-size: 48px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Hiển thị chữ */
+.rose:hover span {
+    opacity: 1;
+}
+</style>
+</head>
+<body>
+<div class="rose">
+  <!-- Danh sách 6 bức ảnh -->
+  <img src="templates/cute6.jpg" alt="Dingoc 1">
+  <img src="templates/cute5.jpg" alt="Dingoc 2">
+  <img src="templates/cute4.jpg" alt="Dingoc 3">
+  <img src="templates/cute3.jpg" alt="Dingoc 4">
+  <img src="templates/cute2.jpg" alt="Dingoc 5">
+  <img src="templates/cute1.jpg" alt="Dingoc 6">
+  <!-- Các phần tử span chứa các chữ -->
+  <span id="cink" style="top: 30%; left: 40%;">Dingoc đáng iu</span>
+  <span id="ngoan" style="top: 45%; left: 45%;">Ngày 20-10 thiệt là</span>
+  <span id="iu" style="top: 60%; left: 49%;">Dui dẻ và hạnh phúc nhóoo</span>
+</div>
+
+<!-- Script tạo hiệu ứng tuyết rơi -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let container = document.querySelector("body");
+
+    function createSnowflake() {
+        let snowflake = document.createElement("div");
+        snowflake.classList.add("snowflake");
+        snowflake.style.left = Math.random() * window.innerWidth + "px";
+        snowflake.style.animationDuration = Math.random() * 3 + 2 + "s";
+        snowflake.innerHTML = "❄";
+
+        container.appendChild(snowflake);
+
+        setTimeout(() => {
+            snowflake.remove();
+        }, 5000);
+    }
+
+    setInterval(createSnowflake, 100);
+
+    // Hiển thị từng chữ 'cink', 'ngoan', 'iu'
+    setTimeout(() => {
+        document.getElementById('cink').style.opacity = 1;
+    }, 500);
+    setTimeout(() => {
+        document.getElementById('ngoan').style.opacity = 1;
+    }, 1000);
+    setTimeout(() => {
+        document.getElementById('iu').style.opacity = 1;
+    }, 1500);
+    // Ẩn chữ sau 2 giây
+    setTimeout(() => {
+        document.getElementById('cink').style.opacity = 0;
+        document.getElementById('ngoan').style.opacity = 0;
+        document.getElementById('iu').style.opacity = 0;
+    }, 4000);
+
+    // Tự động chuyển hướng sau 6 giây
+    setTimeout(() => {
+        window.location.href = "heart.html";
+    }, 6000);
+});
+</script>
+</body>
+</html>

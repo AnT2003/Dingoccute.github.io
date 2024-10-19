@@ -109,6 +109,26 @@ body {
 .rose:hover span {
     opacity: 1;
 }
+
+#nextButton {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #ff1493;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#nextButton:hover {
+    background-color: #ff1493;
+    color: white;
+}
 </style>
 </head>
 <body>
@@ -126,10 +146,14 @@ body {
   <span id="iu" style="top: 60%; left: 49%;">Dui dẻ và hạnh phúc nhóoo</span>
 </div>
 
+<!-- Nút "Next" -->
+<button id="nextButton">Next</button>
+
 <!-- Script tạo hiệu ứng tuyết rơi -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     let container = document.querySelector("body");
+    let nextButton = document.getElementById("nextButton");
 
     function createSnowflake() {
         let snowflake = document.createElement("div");
@@ -164,15 +188,16 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('iu').style.opacity = 0;
     }, 4000);
 
-    // Sự kiện khi người dùng bấm vào màn hình
-    document.body.addEventListener('click', () => {
-        window.location.href = "heart.html";
-    });
-
-    // Tự động chuyển hướng sau 6 giây nếu không có tương tác
-    setTimeout(() => {
+    // Chuyển hướng sau 6 giây nếu không click
+    let autoRedirect = setTimeout(() => {
         window.location.href = "heart.html";
     }, 6000);
+
+    // Khi bấm vào nút "Next", chuyển hướng ngay lập tức
+    nextButton.addEventListener("click", function () {
+        clearTimeout(autoRedirect); // Hủy tự động chuyển trang
+        window.location.href = "heart.html";
+    });
 });
 </script>
 </body>

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dingoc cutephomaique</title>
 <style>
+/* CSS cho trang "index" */
 body {
     margin: 0;
     padding: 0;
@@ -18,8 +19,8 @@ body {
 
 .rose {
     position: relative;
-    width: 800px; /* Kích thước của bông hoa */
-    height: 600px; /* Kích thước của bông hoa */
+    width: 800px;
+    height: 600px;
     overflow: hidden;
 }
 
@@ -33,42 +34,38 @@ body {
 .rose img:nth-child(1) {
     top: 0;
     right: 70%;
-    transform: rotate(0deg) translateX(0px) translateY(0px);
     transition: opacity 0.5s ease-in-out;
 }
 
 .rose img:nth-child(3) {
     bottom: 30%;
     right: 10%;
-    transform: rotate(25deg) translateX(0px) translateY(0px);
     transition: opacity 2s ease-in-out;
 }
 
 .rose img:nth-child(2) {
     top: 0;
     left: 70%;
-    transform: rotate(0deg) translateX(0px) translateY(0px);
     transition: opacity 2.5s ease-in-out;
 }
 
 .rose img:nth-child(4) {
     bottom: 30%;
     left: 10%;
-    transform: rotate(-30deg) translateX(0px) translateY(0px);
     transition: opacity 1s ease-in-out;
 }
 
 .rose img:nth-child(5) {
     bottom: 0;
     left: 50%;
-    transform: rotate(0deg) translateX(-50%) translateY(0px);
+    transform: translateX(-50%);
     transition: opacity 1.5s ease-in-out;
 }
 
 .rose img:nth-child(6) {
     bottom: 60%;
     left: 50%;
-    transform: rotate(0deg) translateX(-50%) translateY(0px);
+    transform: translateX(-50%);
     width: 25%;
     height: 30%;
     transition: opacity 0s ease-in-out;
@@ -94,7 +91,6 @@ body {
     }
 }
 
-/* Style cho từng chữ */
 .rose span {
     position: absolute;
     color: white;
@@ -105,7 +101,6 @@ body {
     transition: opacity 0.5s ease-in-out;
 }
 
-/* Hiển thị chữ */
 .rose:hover span {
     opacity: 1;
 }
@@ -129,28 +124,80 @@ body {
     background-color: #ff1493;
     color: white;
 }
+
+/* CSS cho trang "heart" */
+#heartPage {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    color: #ea80b0;
+    text-align: center;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+}
+
+.heart {
+    display: inline-block;
+    color: red;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
 </style>
 </head>
 <body>
-<div class="rose">
-  <!-- Danh sách 6 bức ảnh -->
-  <img src="templates/cute6.jpg" alt="Dingoc 1">
-  <img src="templates/cute5.jpg" alt="Dingoc 2">
-  <img src="templates/cute4.jpg" alt="Dingoc 3">
-  <img src="templates/cute3.jpg" alt="Dingoc 4">
-  <img src="templates/cute2.jpg" alt="Dingoc 5">
-  <img src="templates/cute1.jpg" alt="Dingoc 6">
-  <!-- Các phần tử span chứa các chữ -->
-  <span id="cink" style="top: 30%; left: 40%;">Dingoc đáng iu</span>
-  <span id="ngoan" style="top: 45%; left: 45%;">Ngày 20-10 thiệt là</span>
-  <span id="iu" style="top: 60%; left: 49%;">Dui dẻ và hạnh phúc nhóoo</span>
+
+<!-- Trang "index" -->
+<div id="indexPage">
+    <div class="rose">
+        <img src="templates/cute6.jpg" alt="Dingoc 1">
+        <img src="templates/cute5.jpg" alt="Dingoc 2">
+        <img src="templates/cute4.jpg" alt="Dingoc 3">
+        <img src="templates/cute3.jpg" alt="Dingoc 4">
+        <img src="templates/cute2.jpg" alt="Dingoc 5">
+        <img src="templates/cute1.jpg" alt="Dingoc 6">
+        <span id="cink" style="top: 10%; left: 30%;">Dingoc đáng iu</span>
+        <span id="ngoan" style="top: 40%; left: 35%;">Ngày 20-10 thiệt là</span>
+        <span id="iu" style="top: 70%; left: 40%;">Dui dẻ và hạnh phúc nhóoo</span>
+    </div>
+    <button id="nextButton">Next</button>
 </div>
 
-<!-- Nút "Next" -->
-<button id="nextButton">Next</button>
+<!-- Trang "heart" -->
+<div id="heartPage">
+    <canvas id="pinkboard"></canvas>
+    <div class="message">mãi iu Dingoc <span class="heart">❤️</span></div>
+</div>
 
-<!-- Script tạo hiệu ứng tuyết rơi -->
 <script>
+// Script tạo hiệu ứng tuyết rơi cho trang "index"
 document.addEventListener("DOMContentLoaded", function () {
     let container = document.querySelector("body");
     let nextButton = document.getElementById("nextButton");
@@ -181,24 +228,221 @@ document.addEventListener("DOMContentLoaded", function () {
     setTimeout(() => {
         document.getElementById('iu').style.opacity = 1;
     }, 1500);
-    // Ẩn chữ sau 2 giây
     setTimeout(() => {
         document.getElementById('cink').style.opacity = 0;
         document.getElementById('ngoan').style.opacity = 0;
         document.getElementById('iu').style.opacity = 0;
     }, 4000);
 
-    // Chuyển hướng sau 6 giây nếu không click
-    let autoRedirect = setTimeout(() => {
-        window.location.href = "heart.html";
-    }, 6000);
-
-    // Khi bấm vào nút "Next", chuyển hướng ngay lập tức
+    // Khi bấm vào nút "Next", chuyển sang trang "heart"
     nextButton.addEventListener("click", function () {
-        clearTimeout(autoRedirect); // Hủy tự động chuyển trang
-        window.location.href = "heart.html";
+        document.getElementById("indexPage").style.display = "none";
+        document.getElementById("heartPage").style.display = "block";
+        startHeartAnimation();
     });
+
+    // Tự động chuyển trang sau 6 giây
+    setTimeout(() => {
+        nextButton.click();
+    }, 6000);
 });
+
+// Script tạo hiệu ứng heart cho trang "heart"
+function startHeartAnimation() {
+    var settings = {
+        particles: {
+            length: 500,
+            duration: 2,
+            velocity: 100,
+            effect: -0.75,
+            size: 30,
+        },
+    };
+
+    var Point = (function() {
+        function Point(x, y) {
+            this.x = (typeof x !== 'undefined') ? x : 0;
+            this.y = (typeof y !== 'undefined') ? y : 0;
+        }
+        Point.prototype.clone = function() {
+            return new Point(this.x, this.y);
+        };
+        Point.prototype.length = function(length) {
+            if (typeof length == 'undefined')
+                return Math.sqrt(this.x * this.x + this.y * this.y);
+            this.normalize();
+            this.x *= length;
+            this.y *= length;
+            return this;
+        };
+        Point.prototype.normalize = function() {
+            var length = this.length();
+            this.x /= length;
+            this.y /= length;
+            return this;
+        };
+        return Point;
+    })();
+
+    var Particle = (function() {
+        function Particle() {
+            this.position = new Point();
+            this.velocity = new Point();
+            this.acceleration = new Point();
+            this.age = 0;
+        }
+        Particle.prototype.initialize = function(x, y, dx, dy) {
+            this.position.x = x;
+            this.position.y = y;
+            this.velocity.x = dx;
+            this.velocity.y = dy;
+            this.acceleration.x = dx * settings.particles.effect;
+            this.acceleration.y = dy * settings.particles.effect;
+            this.age = 0;
+        };
+        Particle.prototype.update = function(deltaTime) {
+            this.position.x += this.velocity.x * deltaTime;
+            this.position.y += this.velocity.y * deltaTime;
+            this.velocity.x += this.acceleration.x * deltaTime;
+            this.velocity.y += this.acceleration.y * deltaTime;
+            this.age += deltaTime;
+        };
+        Particle.prototype.draw = function(context, image) {
+            var size = image.width * (1 - this.age / settings.particles.duration);
+            context.globalAlpha = 1 - this.age / settings.particles.duration;
+            context.drawImage(image, this.position.x - size / 2, this.position.y - size / 2, size, size);
+        };
+        return Particle;
+    })();
+
+    var ParticlePool = (function() {
+        var particles,
+            firstActive = 0,
+            firstFree = 0,
+            duration = settings.particles.duration;
+
+        function ParticlePool(length) {
+            particles = new Array(length);
+            for (var i = 0; i < particles.length; i++)
+                particles[i] = new Particle();
+        }
+        ParticlePool.prototype.add = function(x, y, dx, dy) {
+            particles[firstFree].initialize(x, y, dx, dy);
+            firstFree++;
+            if (firstFree == particles.length) firstFree = 0;
+            if (firstActive == firstFree) firstActive++;
+            if (firstActive == particles.length) firstActive = 0;
+        };
+        ParticlePool.prototype.update = function(deltaTime) {
+            var i;
+            if (firstActive < firstFree) {
+                for (i = firstActive; i < firstFree; i++)
+                    particles[i].update(deltaTime);
+            }
+            if (firstFree < firstActive) {
+                for (i = firstActive; i < particles.length; i++)
+                    particles[i].update(deltaTime);
+                for (i = 0; i < firstFree; i++)
+                    particles[i].update(deltaTime);
+            }
+            while (particles[firstActive].age >= duration && firstActive != firstFree) {
+                firstActive++;
+                if (firstActive == particles.length) firstActive = 0;
+            }
+        };
+        ParticlePool.prototype.draw = function(context, image) {
+            if (firstActive < firstFree) {
+                for (var i = firstActive; i < firstFree; i++)
+                    particles[i].draw(context, image);
+            }
+            if (firstFree < firstActive) {
+                for (var i = firstActive; i < particles.length; i++)
+                    particles[i].draw(context, image);
+                for (var i = 0; i < firstFree; i++)
+                    particles[i].draw(context, image);
+            }
+        };
+        return ParticlePool;
+    })();
+
+    (function(canvas) {
+        var context = canvas.getContext('2d'),
+            particles = new ParticlePool(settings.particles.length),
+            particleRate = settings.particles.length / settings.particles.duration, // particles/sec
+            time;
+
+        function pointOnHeart(t) {
+            return new Point(
+                160 * Math.pow(Math.sin(t), 3),
+                130 * Math.cos(t) - 50 * Math.cos(2 * t) - 20 * Math.cos(3 * t) - 10 * Math.cos(4 * t) + 25
+            );
+        }
+
+        var image = (function() {
+            var canvas = document.createElement('canvas'),
+                context = canvas.getContext('2d');
+            canvas.width = settings.particles.size;
+            canvas.height = settings.particles.size;
+
+            function to(t) {
+                var point = pointOnHeart(t);
+                point.x = settings.particles.size / 2 + point.x * settings.particles.size / 350;
+                point.y = settings.particles.size / 2 - point.y * settings.particles.size / 350;
+                return point;
+            }
+
+            context.beginPath();
+            var t = -Math.PI;
+            var point = to(t);
+            context.moveTo(point.x, point.y);
+            while (t < Math.PI) {
+                t += 0.01;
+                point = to(t);
+                context.lineTo(point.x, point.y);
+            }
+            context.closePath();
+            context.fillStyle = '#ea80b0';
+            context.fill();
+
+            var image = new Image();
+            image.src = canvas.toDataURL();
+            return image;
+        })();
+
+        function render() {
+            requestAnimationFrame(render);
+
+            var newTime = new Date().getTime() / 1000,
+                deltaTime = newTime - (time || newTime);
+            time = newTime;
+
+            context.clearRect(0, 0, canvas.width, canvas.height);
+
+            var amount = particleRate * deltaTime;
+            for (var i = 0; i < amount; i++) {
+                var pos = pointOnHeart(Math.PI - 2 * Math.PI * Math.random());
+                var dir = pos.clone().length(settings.particles.velocity * Math.random());
+                particles.add(canvas.width / 2 + pos.x, canvas.height / 2 - pos.y, dir.x, -dir.y);
+            }
+
+            particles.update(deltaTime);
+            particles.draw(context, image);
+        }
+
+        function onResize() {
+            canvas.width = canvas.clientWidth;
+            canvas.height = canvas.clientHeight;
+        }
+
+        window.onresize = onResize;
+
+        setTimeout(function() {
+            onResize();
+            render();
+        }, 10);
+    })(document.getElementById('pinkboard'));
+}
 </script>
+
 </body>
 </html>

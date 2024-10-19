@@ -164,7 +164,12 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('iu').style.opacity = 0;
     }, 4000);
 
-    // Tự động chuyển hướng sau 6 giây
+    // Sự kiện khi người dùng bấm vào màn hình
+    document.body.addEventListener('click', () => {
+        window.location.href = "heart.html";
+    });
+
+    // Tự động chuyển hướng sau 6 giây nếu không có tương tác
     setTimeout(() => {
         window.location.href = "heart.html";
     }, 6000);
